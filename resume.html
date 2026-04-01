@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>김덕환 · 이력서</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --samsung-blue: #1428A0;
+      --samsung-blue-dark: #0d1c7a;
+      --samsung-blue-mid: #1e3db5;
+      --samsung-blue-light: #e8eaf8;
+      --samsung-blue-pale: #f0f2fb;
+      --bg: #f4f5f9;
+      --surface: #ffffff;
+      --text-primary: #0a0a0a;
+      --text-secondary: #4a4a4a;
+      --text-muted: #8a8a8a;
+      --border: #dde0ec;
+      --border-strong: #c5c9df;
+      --font: 'Noto Sans KR', 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg);
+      font-family: var(--font);
+      color: var(--text-primary);
+      -webkit-font-smoothing: antialiased;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    /* ── 상단 헤더 바 ── */
+    .top-bar {
+      background: var(--samsung-blue);
+      height: 4px;
+    }
+
+    nav {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 100;
+    }
+    .nav-inner {
+      max-width: 960px; margin: 0 auto;
+      padding: 0 40px; height: 56px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 0.88rem; font-weight: 700;
+      color: var(--samsung-blue); letter-spacing: -0.01em;
+    }
+    .nav-logo::before {
+      content: '';
+      display: block; width: 3px; height: 18px;
+      background: var(--samsung-blue); border-radius: 2px;
+    }
+    .nav-status {
+      font-size: 0.7rem; font-weight: 600;
+      color: var(--text-muted);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 4px 12px;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── 페이지 컨테이너 ── */
+    .page { max-width: 960px; margin: 0 auto; padding: 0 40px 80px; }
+
+    /* ── 히어로 ── */
+    .hero {
+      background: var(--samsung-blue);
+      margin: 0 -40px 40px;
+      padding: 56px 40px 48px;
+      display: grid; grid-template-columns: 1fr 140px; gap: 40px; align-items: center;
+      position: relative; overflow: hidden;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; right: -60px; top: -60px;
+      width: 280px; height: 280px; border-radius: 50%;
+      background: rgba(255,255,255,0.04);
+    }
+    .hero::before {
+      content: '';
+      position: absolute; right: 80px; bottom: -80px;
+      width: 200px; height: 200px; border-radius: 50%;
+      background: rgba(255,255,255,0.03);
+    }
+    .hero-eyebrow {
+      font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: rgba(255,255,255,0.55); margin-bottom: 12px;
+    }
+    .hero h1 {
+      font-size: 2.8rem; font-weight: 700;
+      letter-spacing: -0.03em; line-height: 1;
+      color: #ffffff; margin-bottom: 10px;
+    }
+    .hero-sub {
+      font-size: 0.88rem; font-weight: 400;
+      color: rgba(255,255,255,0.65); line-height: 1.7;
+      margin-bottom: 28px;
+    }
+    .contact-row {
+      display: flex; flex-wrap: wrap; gap: 6px;
+    }
+    .contact-chip {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 5px 12px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.18);
+      font-size: 0.72rem; font-weight: 400;
+      color: rgba(255,255,255,0.85); letter-spacing: 0.01em;
+    }
+
+    .hero-avatar {
+      width: 100px; height: 100px;
+      background: rgba(255,255,255,0.12);
+      border: 2px solid rgba(255,255,255,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.2rem; font-weight: 700; color: rgba(255,255,255,0.9);
+      flex-shrink: 0; position: relative; z-index: 1;
+    }
+
+    /* ── 섹션 공통 ── */
+    section { margin-bottom: 40px; }
+
+    .section-header {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 20px;
+    }
+    .section-label {
+      font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--samsung-blue);
+    }
+    .section-line {
+      flex: 1; height: 1px; background: var(--border);
+    }
+
+    /* ── 요약 ── */
+    .summary-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+      border: 1px solid var(--border); background: var(--border);
+    }
+    .summary-card {
+      background: var(--surface);
+      padding: 24px 20px; text-align: center;
+    }
+    .summary-val {
+      font-size: 1.9rem; font-weight: 700;
+      color: var(--samsung-blue); letter-spacing: -0.04em; line-height: 1;
+      margin-bottom: 6px;
+    }
+    .summary-val em { font-size: 0.9rem; font-weight: 500; font-style: normal; }
+    .summary-key {
+      font-size: 0.7rem; font-weight: 500;
+      color: var(--text-muted); letter-spacing: 0.04em;
+    }
+
+    /* ── 경력 타임라인 ── */
+    .timeline { display: flex; flex-direction: column; }
+    .tl-item {
+      display: grid; grid-template-columns: 160px 1fr;
+      border-left: none;
+    }
+    .tl-left {
+      padding: 24px 20px 24px 0;
+      border-right: 2px solid var(--border);
+      text-align: right; position: relative;
+    }
+    .tl-dot {
+      position: absolute; right: -6px; top: 28px;
+      width: 10px; height: 10px;
+      background: var(--border-strong);
+      border: 2px solid var(--bg);
+    }
+    .tl-item.current .tl-dot {
+      background: var(--samsung-blue);
+      border-color: var(--bg);
+    }
+    .tl-period {
+      font-size: 0.7rem; font-weight: 400;
+      color: var(--text-muted); line-height: 1.7;
+    }
+    .tl-duration {
+      font-size: 0.68rem; font-weight: 600;
+      color: var(--samsung-blue); margin-top: 4px;
+    }
+    .tl-right {
+      padding: 24px 0 24px 28px;
+      border-bottom: 1px solid var(--border);
+    }
+    .tl-item:last-child .tl-right { border-bottom: none; }
+    .tl-company {
+      font-size: 1rem; font-weight: 700;
+      color: var(--text-primary); margin-bottom: 4px;
+    }
+    .tl-meta {
+      display: flex; align-items: center; gap: 8px;
+      margin-bottom: 14px; flex-wrap: wrap;
+    }
+    .tl-role {
+      font-size: 0.78rem; font-weight: 500; color: var(--text-secondary);
+    }
+    .tl-tag {
+      font-size: 0.62rem; font-weight: 700;
+      padding: 2px 8px;
+      background: var(--samsung-blue); color: #fff;
+      letter-spacing: 0.06em;
+    }
+    .tl-tag.ended {
+      background: var(--bg); color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+    .tl-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .tl-list li {
+      font-size: 0.82rem; font-weight: 400;
+      color: var(--text-secondary); line-height: 1.65;
+      padding-left: 14px; position: relative;
+    }
+    .tl-list li::before {
+      content: '—';
+      position: absolute; left: 0;
+      color: var(--border-strong); font-size: 0.7rem;
+    }
+
+    /* ── 스킬 ── */
+    .skills-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px;
+      border: 1px solid var(--border); background: var(--border);
+    }
+    .skill-card {
+      background: var(--surface); padding: 22px 24px;
+    }
+    .skill-title {
+      font-size: 0.68rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--samsung-blue); margin-bottom: 14px;
+      padding-bottom: 10px; border-bottom: 1px solid var(--border);
+    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .skill-tag {
+      font-size: 0.75rem; font-weight: 500;
+      padding: 4px 12px;
+      border: 1px solid var(--border-strong);
+      color: var(--text-secondary); background: var(--bg);
+    }
+
+    /* ── 자격증 ── */
+    .cert-table { width: 100%; border-collapse: collapse; background: var(--surface); }
+    .cert-table tr { border-bottom: 1px solid var(--border); }
+    .cert-table tr:last-child { border-bottom: none; }
+    .cert-table td { padding: 13px 20px; font-size: 0.82rem; }
+    .cert-table td:first-child {
+      font-weight: 600; color: var(--text-primary); width: 60%;
+    }
+    .cert-table td:last-child {
+      font-weight: 400; color: var(--text-muted); text-align: right;
+      font-size: 0.75rem;
+    }
+    .cert-table tr:nth-child(even) td { background: var(--samsung-blue-pale); }
+
+    /* ── 학력 ── */
+    .edu-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 20px 24px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .edu-name { font-size: 0.92rem; font-weight: 700; }
+    .edu-detail { font-size: 0.78rem; color: var(--text-muted); margin-top: 3px; }
+    .edu-period { font-size: 0.72rem; color: var(--text-muted); text-align: right; }
+
+    /* ── 자기소개서 ── */
+    .essay-grid { display: flex; flex-direction: column; gap: 2px; }
+    .essay-card {
+      background: var(--surface);
+      border-left: 3px solid var(--samsung-blue);
+      padding: 26px 28px;
+    }
+    .essay-num {
+      font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--samsung-blue); margin-bottom: 6px;
+    }
+    .essay-title {
+      font-size: 0.96rem; font-weight: 700;
+      color: var(--text-primary); margin-bottom: 12px;
+    }
+    .essay-body {
+      font-size: 0.84rem; font-weight: 400;
+      color: var(--text-secondary); line-height: 1.9;
+      word-break: keep-all;
+    }
+
+    /* ── 푸터 ── */
+    footer {
+      background: var(--samsung-blue-dark);
+      color: rgba(255,255,255,0.45);
+      text-align: center;
+      padding: 24px;
+      font-size: 0.7rem; letter-spacing: 0.05em;
+    }
+
+    /* ── 반응형 ── */
+    @media (max-width: 680px) {
+      .page { padding: 0 20px 60px; }
+      .nav-inner { padding: 0 20px; }
+      .hero { margin: 0 -20px 32px; padding: 44px 20px 40px; grid-template-columns: 1fr; }
+      .hero-avatar { display: none; }
+      .summary-grid, .skills-grid { grid-template-columns: 1fr; }
+      .tl-item { grid-template-columns: 1fr; }
+      .tl-left { border-right: none; border-bottom: 1px solid var(--border); padding: 16px 0 10px; text-align: left; }
+      .tl-dot { display: none; }
+      .tl-right { padding: 14px 0 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="top-bar"></div>
+
+<nav>
+  <div class="nav-inner">
+    <span class="nav-logo">김덕환 이력서</span>
+    <span class="nav-status">2026년 4월 기준</span>
+  </div>
+</nav>
+
+<div class="page">
+
+  <!-- 히어로 -->
+  <div class="hero">
+    <div>
+      <p class="hero-eyebrow">Curriculum Vitae · 현장 관리 전문가</p>
+      <h1>김덕환</h1>
+      <p class="hero-sub">인력·재고·조직 관리 전반을 아우르는 현장 관리 전문가<br>총 경력 14년 9개월 · 경기 고양시 일산동구 거주</p>
+      <div class="contact-row">
+        <span class="contact-chip">✉ lensed86@gmail.com</span>
+        <span class="contact-chip">☎ 010-9896-9761</span>
+        <span class="contact-chip">● 1986년생 · 만 39세</span>
+        <span class="contact-chip">◎ 희망연봉 3,800~4,000만원</span>
+      </div>
+    </div>
+    <div class="hero-avatar">덕</div>
+  </div>
+
+  <!-- 요약 -->
+  <section>
+    <div class="section-header">
+      <span class="section-label">Summary</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="summary-grid">
+      <div class="summary-card">
+        <div class="summary-val">14<em>년 9개월</em></div>
+        <div class="summary-key">총 경력</div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-val">4<em>개사</em></div>
+        <div class="summary-key">근무 이력</div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-val">7<em>개</em></div>
+        <div class="summary-key">보유 자격증</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 경력 -->
+  <section>
+    <div class="section-header">
+      <span class="section-label">Work Experience</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-left">
+          <div class="tl-dot"></div>
+          <div class="tl-period">2023.05<br>~ 2026.04</div>
+          <div class="tl-duration">2년 11개월</div>
+        </div>
+        <div class="tl-right">
+          <div class="tl-company">빔모빌리티코리아</div>
+          <div class="tl-meta">
+            <span class="tl-role">사원 · 팀원 / 인력관리</span>
+            <span class="tl-tag ended">퇴사</span>
+          </div>
+          <ul class="tl-list">
+            <li>현장 관리자로서 본사와 현장 사이의 가교 역할 수행</li>
+            <li>현장 인원 채용, 근태 관리, 업무 퍼포먼스 관리, 현장 업무 지시</li>
+            <li>현장 오피스(웨어하우스) 관리</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-left">
+          <div class="tl-dot"></div>
+          <div class="tl-period">2018.10<br>~ 2022.08</div>
+          <div class="tl-duration">3년 11개월</div>
+        </div>
+        <div class="tl-right">
+          <div class="tl-company">로지션 · LG유플러스 수도권 유선통합 일산창고</div>
+          <div class="tl-meta">
+            <span class="tl-role">과장 · 팀장 / 소장 · 현장관리자</span>
+          </div>
+          <ul class="tl-list">
+            <li>직원 근태 관리 및 센터 전반 운영</li>
+            <li>판토스 WMS를 활용한 신품·철거품 입출고 전산 관리</li>
+            <li>LG유플러스 1군 업체·인프라팀·운영팀 자재 입출고/재고 관리</li>
+            <li>협력사 및 고객사 방문 대응</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-left">
+          <div class="tl-dot"></div>
+          <div class="tl-period">2011.04<br>~ 2017.11</div>
+          <div class="tl-duration">6년 8개월</div>
+        </div>
+        <div class="tl-right">
+          <div class="tl-company">쿠쿠홈시스 의정부지점</div>
+          <div class="tl-meta">
+            <span class="tl-role">사원 · 팀장</span>
+          </div>
+          <ul class="tl-list">
+            <li>렌탈 제품(정수기·비데·청정기 등) 신규 설치 및 AS</li>
+            <li>계약 만료 고객 제품 회수</li>
+            <li>파주 지역 담당 조장으로 지역 조 운영 및 조원 보조</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-left">
+          <div class="tl-dot"></div>
+          <div class="tl-period">2009.09<br>~ 2010.11</div>
+          <div class="tl-duration">1년 3개월</div>
+        </div>
+        <div class="tl-right">
+          <div class="tl-company">코웨이 덕양서비스팀</div>
+          <div class="tl-meta">
+            <span class="tl-role">사원 · 팀원</span>
+          </div>
+          <ul class="tl-list">
+            <li>웅진코웨이 렌탈 제품 신규 설치 및 AS</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 스킬 -->
+  <section>
+    <div class="section-header">
+      <span class="section-label">Skills</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-title">관리 역량</div>
+        <div class="skill-tags">
+          <span class="skill-tag">인력관리</span>
+          <span class="skill-tag">조직관리</span>
+          <span class="skill-tag">재고관리</span>
+          <span class="skill-tag">고객관리</span>
+          <span class="skill-tag">파견관리</span>
+          <span class="skill-tag">비품관리</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-title">실무 역량</div>
+        <div class="skill-tags">
+          <span class="skill-tag">창고관리 입고/입하</span>
+          <span class="skill-tag">지게차 운전</span>
+          <span class="skill-tag">WMS 운영</span>
+          <span class="skill-tag">장비 수리</span>
+          <span class="skill-tag">사무직</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 자격증 -->
+  <section>
+    <div class="section-header">
+      <span class="section-label">Certifications</span>
+      <div class="section-line"></div>
+    </div>
+    <table class="cert-table">
+      <tr><td>1종대형운전면허</td><td>2013.05 · 경찰청</td></tr>
+      <tr><td>1종보통운전면허</td><td>2005.01 · 경찰청</td></tr>
+      <tr><td>2종소형운전면허</td><td>2022.10 · 경찰청</td></tr>
+      <tr><td>건설기계조종사면허 (3톤미만 지게차)</td><td>2005.11 · 국토교통부</td></tr>
+      <tr><td>자동차정비기능사</td><td>2004.12 · 한국산업인력공단</td></tr>
+      <tr><td>생활체육지도자 3급 (보디빌딩)</td><td>2009.08 · 체육과학연구원</td></tr>
+      <tr><td>태권도 3단</td><td>1997.10 · 대한태권도협회</td></tr>
+    </table>
+  </section>
+
+  <!-- 학력 -->
+  <section>
+    <div class="section-header">
+      <span class="section-label">Education</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="edu-card">
+      <div>
+        <div class="edu-name">대성고등학교</div>
+        <div class="edu-detail">문과계열 졸업</div>
+      </div>
+      <div class="edu-period">2002.03 – 2005.02</div>
+    </div>
+  </section>
+
+  <!-- 자기소개서 -->
+  <section>
+    <div class="section-header">
+      <span class="section-label">Cover Letter</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="essay-grid">
+      <div class="essay-card">
+        <div class="essay-num">01 · 운동선수로서의 근성</div>
+        <div class="essay-title">목표를 설정하고 끝내 성취해내는 능력</div>
+        <div class="essay-body">유년 시절부터 태권도 선수로서 꿈을 키웠으나, 고교 시절 무릎 부상으로 인한 수술로 진로를 변경해야 했습니다. 아쉬움은 컸지만 좌절하기보다 제가 가진 '근성'을 쏟을 새로운 분야를 찾았습니다. 이후 2년 동안 자동차 공학에 몰두하여 자동차정비기능사를 취득했습니다. 이는 단순히 자격증 하나를 얻은 것이 아니라, 어떤 상황에서도 목표를 설정하고 끝내 성취해내는 능력을 스스로 증명한 시간이었습니다.</div>
+      </div>
+      <div class="essay-card">
+        <div class="essay-num">02 · 분석력과 운영 관리</div>
+        <div class="essay-title">현장 구조를 꿰뚫는 분석력과 철저한 운영 관리</div>
+        <div class="essay-body">다양한 현장을 거치며 기계 구조의 이해와 운영 관리 능력을 동시에 쌓아왔습니다. 가전 설치 및 AS를 수행할 때는 단순히 매뉴얼에 의존하지 않고, 현장 구조를 빠르게 파악하여 가장 효율적인 시공 방향을 정하는 감각을 익혔습니다. 유플러스 유선센터 총괄 당시에는 입출고 검수와 주기적인 재고 조사를 철저히 관리해 재고 손실을 막고 창고의 수용 능력(Capa)을 상시 최적화하는 등 효율적인 센터 운영에 기여했습니다.</div>
+      </div>
+      <div class="essay-card">
+        <div class="essay-num">03 · 소통 능력</div>
+        <div class="essay-title">현장과 본사를 잇는 유연한 소통의 힘</div>
+        <div class="essay-body">현장직과 관리직을 두루 거치며 얻은 가장 큰 무기는 '소통 능력'입니다. 고객을 직접 상대하는 일부터 직원을 관리하는 일까지 경험하며, 상대의 입장에서 먼저 생각하는 법을 배웠습니다. 빔모빌리티에서도 현장 인원들을 관리함과 동시에 본사와의 긴밀한 소통을 통해 업무의 공백을 줄이고 협업 성과를 높였습니다.</div>
+      </div>
+      <div class="essay-card">
+        <div class="essay-num">04 · 입사 포부</div>
+        <div class="essay-title">빠르게 습득하고 결과로 증명하겠습니다</div>
+        <div class="essay-body">기초 지식이 부족하다면 남들보다 더 빠르게 배우면 되고, 업무 능력은 실전에서 부딪히며 키우면 된다고 생각합니다. 저는 새로운 환경을 두려워하지 않고 현장에서 답을 찾는 사람입니다. 그동안 쌓아온 현장 관리 노하우와 유연한 적응력을 바탕으로, 맡겨진 직무에서 빠르게 제 몫을 해내겠습니다.</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  본 이력서는 2026년 4월 기준으로 작성되었습니다.
+</footer>
+
+</body>
+</html>

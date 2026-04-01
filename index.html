@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>명언 모음</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #fbfbfd;
+      --surface: #ffffff;
+      --surface-2: #f5f5f7;
+      --text-primary: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --text-tertiary: #aeaeb2;
+      --accent: #0071e3;
+      --border: rgba(0,0,0,0.08);
+      --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 24px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.04);
+      --shadow-hover: 0 8px 40px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06);
+      --radius: 18px;
+      --font: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: var(--bg);
+      font-family: var(--font);
+      color: var(--text-primary);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── 헤더 ── */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(251,251,253,0.85);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 32px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+    }
+
+    .site-name {
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--text-primary);
+    }
+
+    /* ── 히어로 ── */
+    .hero {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 88px 32px 64px;
+      text-align: center;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.6rem, 5vw, 4rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      color: var(--text-primary);
+      margin-bottom: 18px;
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      font-weight: 400;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ── 그리드 ── */
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 32px 80px;
+    }
+
+    .quotes-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .quote-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 36px 40px;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+      cursor: default;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .quote-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), #34aadc);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .quote-card:hover {
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-3px);
+    }
+
+    .quote-card:hover::before {
+      opacity: 1;
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .quote-glyph {
+      font-size: 2.8rem;
+      line-height: 1;
+      color: var(--surface-2);
+      font-family: 'Georgia', serif;
+      user-select: none;
+    }
+
+    .quote-index {
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--text-tertiary);
+      letter-spacing: 0.04em;
+      background: var(--surface-2);
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+
+    .quote-text {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--text-primary);
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      flex: 1;
+      word-break: keep-all;
+    }
+
+    .card-bottom {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    .author-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #0071e3, #34aadc);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .quote-author {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      letter-spacing: -0.01em;
+    }
+
+    /* ── 페이지네이션 ── */
+    .pagination-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      margin-top: 48px;
+    }
+
+    .pagination {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--surface);
+      padding: 6px;
+      border-radius: 14px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border);
+    }
+
+    .page-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      border: none;
+      background: transparent;
+      font-size: 0.82rem;
+      font-weight: 500;
+      font-family: var(--font);
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.18s ease;
+    }
+
+    .page-btn:hover { background: var(--surface-2); color: var(--text-primary); }
+
+    .page-btn.active {
+      background: var(--accent);
+      color: #fff;
+      font-weight: 600;
+      box-shadow: 0 2px 8px rgba(0,113,227,0.35);
+    }
+
+    .page-sep { width: 1px; height: 20px; background: var(--border); margin: 0 2px; }
+
+    .page-arrow {
+      height: 36px;
+      padding: 0 14px;
+      border-radius: 10px;
+      border: none;
+      background: transparent;
+      font-size: 0.82rem;
+      font-weight: 500;
+      font-family: var(--font);
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.18s ease;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .page-arrow:hover:not(:disabled) { background: var(--surface-2); color: var(--text-primary); }
+    .page-arrow:disabled { opacity: 0.28; cursor: default; }
+
+    .counter {
+      font-size: 0.72rem;
+      color: var(--text-tertiary);
+      font-weight: 400;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── 반응형 ── */
+    @media (max-width: 680px) {
+      .quotes-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 2.2rem; }
+      .hero { padding: 60px 20px 40px; }
+      .container { padding: 0 20px 60px; }
+      .header-inner { padding: 0 20px; }
+      .quote-card { padding: 28px 28px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <span class="site-name">명언 모음</span>
+    </div>
+  </header>
+
+  <section class="hero">
+    <p class="hero-eyebrow">Quotes</p>
+    <h1>위대한 생각들</h1>
+    <p>역사를 바꾼 인물들이 남긴 삶의 지혜</p>
+  </section>
+
+  <main class="container">
+    <div class="quotes-grid" id="quotes-grid"></div>
+    <div class="pagination-wrap">
+      <div class="pagination" id="pagination"></div>
+      <p class="counter" id="counter"></p>
+    </div>
+  </main>
+
+  <script>
+    const quotes = [
+      { text: "인생은 자전거를 타는 것과 같다. 균형을 잡으려면 계속 움직여야 한다.", author: "알베르트 아인슈타인" },
+      { text: "천재란 1%의 영감과 99%의 노력으로 이루어진다.", author: "토마스 에디슨" },
+      { text: "당신이 할 수 있다고 생각하든, 할 수 없다고 생각하든, 당신이 옳다.", author: "헨리 포드" },
+      { text: "시작이 반이다.", author: "아리스토텔레스" },
+      { text: "넘어지는 것은 실패가 아니다. 넘어진 채로 있는 것이 실패다.", author: "메리 피커드" },
+      { text: "성공은 열정을 잃지 않고 실패에서 실패로 걸어가는 능력이다.", author: "윈스턴 처칠" },
+      { text: "두려움은 꿈을 죽이는 가장 큰 적이다.", author: "파울로 코엘료" },
+      { text: "오늘 할 수 있는 일을 내일로 미루지 마라.", author: "벤자민 프랭클린" },
+      { text: "우리가 두려워해야 할 것은 두려움 그 자체뿐이다.", author: "프랭클린 루스벨트" },
+      { text: "지식은 힘이다.", author: "프랜시스 베이컨" },
+      { text: "인생에서 가장 큰 영광은 결코 넘어지지 않는 것이 아니라, 넘어질 때마다 일어서는 것이다.", author: "넬슨 만델라" },
+      { text: "변화하지 않는 것은 변화해야 한다는 사실뿐이다.", author: "헤라클레이토스" },
+      { text: "행복은 목적지가 아니라 여행 방식이다.", author: "마거릿 리 런벡" },
+      { text: "자신을 사랑하는 것이 평생에 걸친 로맨스의 시작이다.", author: "오스카 와일드" },
+      { text: "꿈을 꾸는 것을 멈추지 마라. 꿈은 당신을 자유롭게 한다.", author: "파울로 코엘료" },
+      { text: "미래는 자신의 꿈의 아름다움을 믿는 사람들의 것이다.", author: "엘리너 루스벨트" },
+      { text: "가장 어두운 밤도 끝나고, 해는 뜰 것이다.", author: "빅토르 위고" },
+      { text: "배움에는 끝이 없다.", author: "레오나르도 다 빈치" },
+      { text: "행동은 모든 성공의 근본적인 열쇠다.", author: "파블로 피카소" },
+      { text: "나는 생각한다, 고로 나는 존재한다.", author: "르네 데카르트" },
+    ];
+
+    const PER_PAGE = 10;
+    let currentPage = 1;
+    const totalPages = Math.ceil(quotes.length / PER_PAGE);
+
+    const grid = document.getElementById("quotes-grid");
+    const paginationEl = document.getElementById("pagination");
+    const counterEl = document.getElementById("counter");
+
+    function initials(name) {
+      return name.trim().slice(-1);
+    }
+
+    function render() {
+      const start = (currentPage - 1) * PER_PAGE;
+      const pageQuotes = quotes.slice(start, start + PER_PAGE);
+
+      grid.innerHTML = pageQuotes.map((q, i) => `
+        <div class="quote-card">
+          <div class="card-top">
+            <span class="quote-glyph">&ldquo;</span>
+            <span class="quote-index">${start + i + 1} / ${quotes.length}</span>
+          </div>
+          <p class="quote-text">${q.text}</p>
+          <div class="card-bottom">
+            <div class="author-avatar">${initials(q.author)}</div>
+            <span class="quote-author">${q.author}</span>
+          </div>
+        </div>
+      `).join("");
+
+      // 페이지네이션
+      paginationEl.innerHTML = "";
+
+      const prev = document.createElement("button");
+      prev.className = "page-arrow";
+      prev.innerHTML = "&#8592; 이전";
+      prev.disabled = currentPage === 1;
+      prev.addEventListener("click", () => { currentPage--; render(); window.scrollTo({top:0,behavior:'smooth'}); });
+      paginationEl.appendChild(prev);
+
+      const sep1 = document.createElement("div");
+      sep1.className = "page-sep";
+      paginationEl.appendChild(sep1);
+
+      for (let p = 1; p <= totalPages; p++) {
+        const btn = document.createElement("button");
+        btn.className = "page-btn" + (p === currentPage ? " active" : "");
+        btn.textContent = p;
+        btn.addEventListener("click", () => { currentPage = p; render(); window.scrollTo({top:0,behavior:'smooth'}); });
+        paginationEl.appendChild(btn);
+      }
+
+      const sep2 = document.createElement("div");
+      sep2.className = "page-sep";
+      paginationEl.appendChild(sep2);
+
+      const next = document.createElement("button");
+      next.className = "page-arrow";
+      next.innerHTML = "다음 &#8594;";
+      next.disabled = currentPage === totalPages;
+      next.addEventListener("click", () => { currentPage++; render(); window.scrollTo({top:0,behavior:'smooth'}); });
+      paginationEl.appendChild(next);
+
+      counterEl.textContent = `${start + 1}–${Math.min(start + PER_PAGE, quotes.length)}번 명언 표시 중 · 전체 ${quotes.length}개`;
+    }
+
+    render();
+  </script>
+</body>
+</html>
